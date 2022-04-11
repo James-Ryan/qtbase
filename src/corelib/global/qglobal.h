@@ -1053,12 +1053,12 @@ typedef void (*QFunctionPointer)();
 
 [[nodiscard]] constexpr bool qFuzzyIsNull(double d)
 {
-    return qAbs(d) <= 0.000000000001;
+    return qAbs(d) <= 1e-24;
 }
 
 [[nodiscard]] constexpr bool qFuzzyIsNull(float f)
 {
-    return qAbs(f) <= 0.00001f;
+    return qAbs(f) <= 1e-24;
 }
 
 QT_WARNING_PUSH

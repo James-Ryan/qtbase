@@ -66,6 +66,21 @@ struct QScopedPointerDeleter
 };
 
 template <typename T>
+struct QScopedCryEnginePointerDeleter
+{
+	static inline void cleanup(T* pointer)
+	{
+		// Enforce a complete type.
+		// If you get a compile error here, read the section on forward declared
+		// classes in the QScopedPointer documentation.
+		typedef char IsIncompleteType[sizeof(T) ? 1 : -1];
+		(void)sizeof(IsIncompleteType);
+
+		delete pointer;
+	}
+};
+
+template <typename T>
 struct QScopedPointerArrayDeleter
 {
     static inline void cleanup(T *pointer) noexcept
